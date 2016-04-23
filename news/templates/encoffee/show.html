@@ -1,0 +1,38 @@
+{template "header.html"}
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                <dt>新闻中心</dt>
+				{list action=category module=news pid=1 return=t}
+					<dd {if $t.id==$catid} style="background: #005bac;" {/if}><a href="{$t.url}" {if $t.id==$catid} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">{$cat.name}</span>
+            <span class="fr weizhi">您的位置 &gt;{dr_catpos($catid, '&gt;')}&gt;{dr_strcut($title,30)}</span>
+        </div>
+        <div class="news-con">
+            <div class="title ">{$title}</div>
+            <div class="time">日期：{$updatetime}</div>
+            <div class="clear"></div>
+            <div class="wenben">
+                   {$content}
+            </div>
+
+            <div class="turnpage">
+             	<span class="shang">上一篇:{if $prev_page}<a href="{$prev_page.url}">{dr_strcut($prev_page.title,40)}</a>{else}没有了{/if}</span>
+                <span class="xia">下一篇:{if $next_page}<a href="{$next_page.url}">{dr_strcut($next_page.title,40)}</a>{else}没有了{/if}</span>
+             </div>
+         
+        </div>
+        
+      </div>
+  </div>
+</div>
+<!-- about end -->
+{template "footer.html"}

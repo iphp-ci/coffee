@@ -1,0 +1,103 @@
+{template "header.html"}
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                <dt>合作伙伴</dt>
+                <dd class="selected"><a href="">服务网络</a></dd>
+               
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">服务网络</span>
+            <span class="fr weizhi">您的位置 &gt;服务网络</span>
+        </div>
+        <div class="partner-con">
+             <div class="map_out">
+                <a class="heilongjiang"  href="{SITE_URL}network/index.php?c=category&id=2">黑龙江</a>
+                <a class="jilin" href="{SITE_URL}network/index.php?c=category&id=3">吉林</a>
+                <a class="neimenggu" href="{SITE_URL}network/index.php?c=category&id=4">内蒙古</a>
+                <a class="liaoning"  href="{SITE_URL}network/index.php?c=category&id=5">辽宁</a>
+                <a class="beijing"  href="{SITE_URL}network/index.php?c=category&id=6">北京</a>
+                <a class="shandong"  href="{SITE_URL}network/index.php?c=category&id=7">山东</a>
+                <a class="shanxi1"  href="{SITE_URL}network/index.php?c=category&id=8">山西</a>
+                <a class="ningxia" href="{SITE_URL}network/index.php?c=category&id=9">宁夏</a>
+                <a class="jiangsu" href="{SITE_URL}network/index.php?c=category&id=10">江苏</a>
+                <a class="henan"  href="{SITE_URL}network/index.php?c=category&id=11">河南</a>
+                <a class="shanxi2"  href="{SITE_URL}network/index.php?c=category&id=12">陕西</a>
+                <a class="shanghai"  href="{SITE_URL}network/index.php?c=category&id=13">上海</a>
+                <a class="anhui" href="{SITE_URL}network/index.php?c=category&id=14">安徽</a>
+                <a class="zhejiang"  href="{SITE_URL}network/index.php?c=category&id=15">浙江</a>
+                <a class="jiangxi" href="{SITE_URL}network/index.php?c=category&id=16">江西</a>
+                <a class="hubei"  href="{SITE_URL}network/index.php?c=category&id=17">湖北</a>
+                <a class="hunan"  href="{SITE_URL}network/index.php?c=category&id=18">湖南</a>
+                <a class="fujian" href="{SITE_URL}network/index.php?c=category&id=19">福建</a>
+                <a class="guangdong"  href="{SITE_URL}network/index.php?c=category&id=20">广东</a>
+                <a class="guangxi"  href="{SITE_URL}network/index.php?c=category&id=21">广西</a>
+                <a class="taiwan" href="{SITE_URL}network/index.php?c=category&id=22">台湾</a>
+                <a class="hainan"  href="{SITE_URL}network/index.php?c=category&id=23">海南</a>
+                <a class="guizhou"  href="{SITE_URL}network/index.php?c=category&id=24">贵州</a>
+                <a class="sichuan" href="{SITE_URL}network/index.php?c=category&id=25">四川</a>
+                <a class="yunnan"  href="{SITE_URL}network/index.php?c=category&id=26">云南</a>
+                <a class="gansu"  href="{SITE_URL}network/index.php?c=category&id=27">甘肃</a>
+                <a class="qinghai" href="{SITE_URL}network/index.php?c=category&id=28">青海</a>
+                <a class="xinjiang" href="{SITE_URL}network/index.php?c=category&id=29">新疆</a>
+                <a class="xizang" href="{SITE_URL}network/index.php?c=category&id=30">西藏</a>
+                <a class="hebei" href="{SITE_URL}network/index.php?c=category&id=31">河北</a>
+                <a class="tianjin" href="{SITE_URL}network/index.php?c=category&id=32">天津</a>
+                <a class="chongqing" href="{SITE_URL}network/index.php?c=category&id=33">重庆</a>
+            </div>
+
+        </div>
+        <!-- 搜索服务商 -->
+            <div class="sousuo">
+            <select name="" class="selected1">
+			{list action=linkage code=address pid=$get.address_id return=t1}
+                <option value="{$t1.name}">{$t1.name}</option> 
+			{/list}
+            </select>
+            <select name="" class="selected2">
+                <option value="全国省份下拉列表">代理商城市下拉列表</option>
+                <option value="">北京</option>
+                <option value="">上海</option>
+                <option value="">河南</option>
+                <option value="">河北</option>
+            </select>
+            <input type="text" class="sousuo-input">
+            <input type="submit"  value="" class="sousuo-submit">
+
+            </div>
+
+        <!-- 搜索服务商end -->
+        <!-- 搜索列表 s -->
+            <div class="so-list">
+                
+                <ul>
+                    <li>  
+                        <div class="so-list-l">
+
+                             <a href="{$t.url}">
+                                   <img src="{dr_thumb($thumb)}" alt="">
+                               </a>
+                        </div> 
+                      
+                       <div class="jianshu">
+                           <p class="tit"><a href="{$url}">{$biaoti}</a></p>
+                           {$xiangqing}
+
+
+
+                       </div>
+                    </li>
+
+                </ul>
+            </div>
+        <!-- 搜索列表 end -->
+      </div>
+  </div>
+</div>
+<!-- about end -->
+{template "footer.html"}

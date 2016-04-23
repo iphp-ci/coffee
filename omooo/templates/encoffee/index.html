@@ -1,0 +1,112 @@
+{template "header.html"}
+
+<!--banner start-->
+<div class="banner">
+    <div class="bd">
+        <ul>
+		{list action=navigator type=1 return=t}
+            <li style="background:url({dr_thumb($t.thumb)}) no-repeat center"></li>
+        {/list}
+        </ul>
+          <a class="prev" href="javascript:void(0)"></a>
+          <a class="next" href="javascript:void(0)"></a>
+    </div>
+</div>
+
+<script type="text/javascript">jQuery(".banner").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });</script>
+
+<!--banner end-->
+	
+	<!--广告位置-->
+	<div class="guanggao" id="ad">
+	<img src="{HOME_THEME_PATH}images/close.png"  onclick="closed();" class="close">
+	{list action=navigator type=5 return=t}
+		<a href="{$t.url}"><img src="{dr_thumb($t.thumb)}" class="z-img"></a>
+	{/list}
+	</div>
+<script>
+function closed()
+{
+ var aaa=document.getElementById("ad");
+ aaa.style.display="none";
+}
+</script>
+	<!--广告位置 end-->
+	
+<!-- main -->
+<div class="main">
+    <div class="im01">
+        <div class="title">
+            <a href="{SITE_URL}news/index.php?c=category&id=1">NEWS | 新闻中心</a>
+        </div>
+        <div class="con">
+		{list action=module module=news flag=1 num=1 return=t}
+             <div class="fl">
+                <div class="img">
+                    <a href="{$t.url}"><img src="{dr_thumb($t.thumb)}" alt=""></a>
+                </div>
+            </div>
+            <div class="txt">
+                <div class="timu"><a href="{$t.url}">{dr_strcut($t.title,25)}</a></div>
+                <div class="textarea">
+                   {$t.zhaiyao}
+                </div>
+            </div>
+			{/list}
+        </div>
+    </div>
+    
+    <div class="im01" style="display:block;float:right;">
+        <div class="title">
+            <a href="{SITE_URL}photo/index.php?c=category&id=1">PRODUCTS  | 产品推荐</a>
+        </div>
+        <div class="con">
+		{list action=module module=photo flag=1 num=1 return=t}
+            <div class="fl">
+                <div class="img">
+                    <a href="{$t.url}"><img src="{dr_thumb($t.thumb)}" alt=""></a>
+                </div>
+            </div>
+            <div class="txt">
+                 <div class="timu"><a href="{$t.url}">{dr_strcut($t.title,25)}</a></div>
+                <div class="textarea">
+                    {$t.zhaiyao}
+                </div>
+
+            </div>
+
+		{/list}
+        </div>
+    </div>
+
+	
+
+
+    <!-- 地点链接 -->
+<div class="im02">
+ <div class="friend">
+    <div class="hd">
+        <a class="next"></a>
+        <a class="prev"></a>
+    </div>
+    <div class="bd">
+        <ul class="picList">
+			{list action=module module=network catid=$cat.id flag=1 return=t}
+				 <li>   
+					   <a href="{$t.url}">
+						   <img src="{dr_thumb($t.thumb)}" alt="">
+					   </a>
+				 </li>
+          {/list}
+           
+             
+        </ul>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+jQuery(".friend").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,effect:"leftMarquee",autoPlay:true,vis:7,trigger:"click"});
+</script>
+</div>
+
+{template "footer.html"}

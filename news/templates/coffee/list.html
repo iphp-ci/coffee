@@ -1,0 +1,41 @@
+{template "header.html"}
+
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                <dt>新闻中心</dt>
+				{list action=category module=news pid=1 return=t}
+					<dd {if $t.id==$catid} style="background: #005bac;" {/if}><a href="{$t.url}" {if $t.id==$catid} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">{$cat.name}</span>
+            <span class="fr weizhi">您的位置 &gt;{dr_catpos($catid, '&gt;')}</span>
+        </div>
+        <div class="news-list">
+            <ul>
+				{php $i=1;}
+				{list action=module module=news catid=$cat.id page=1}
+					<li><span class="num">{php echo $i;}.</span><a href="{$t.url}">{$t.title}</a></li>
+					{php $i++;}
+                {/list}
+
+            </ul>
+            
+             
+             <div class="page">
+               {$pages}
+            </div>
+        </div>
+        
+      </div>
+  </div>
+</div>
+<!-- about end -->
+
+{template "footer.html"}

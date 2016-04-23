@@ -1,0 +1,141 @@
+{template "header.html"}
+<script>
+$(function(){
+	ajax_data();
+	{if $result == 1}
+	art.dialog.tips('提交成功', 3, 1);
+    {else if $result}
+        art.dialog.tips('{$result}', 3);
+    {/if}
+	
+
+})
+
+function ajax_data(){
+	var url = '{SITE_URL}index.php?c=api&title=10&m=data2&format=jsonp&auth={md5(SYS_KEY)}&param=list action=module module=news order=updatetime num=10';
+	$.ajax({
+	    type:'get',
+	    url:url,
+	    dataType:'jsonp',
+	    jsonp:'callback',
+	    async: false,
+	    success:function(data){
+	    console.log(data);
+	        if (data.error) {
+	            alert("错误："+data.error);
+	        } else {
+	            var id;
+	            var row = data.return;
+	            var html = '';
+	            for (id in row) {
+	                // 这里是循环显示新闻了
+	                html+= ''+"<li class=\"yugaoindex\"><a href=\""+row[id]['url']+"\" title=\""+row[id]['title']+"\" class=\"fr\">CHICK HERE></a>"+"<p class=\"p1\">"+row[id]['title']+" -"+row[id]['updatetime']+"</p><p>"+"描述信息 ："+row[id]['description']+'';
+	            }
+	            $('#dr_ajax_result').html(html);
+	        }
+	    },
+	    error: function(HttpRequest, ajaxOptions, thrownError) {
+	        alert(HttpRequest.responseText);
+	    }
+	});   
+	
+}
+</script>
+<script>
+
+</script>
+<script type="text/javascript">$("#dr_nav_0").addClass("index")</script>
+<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/message.css" />
+<div class="clear"></div>
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > {dr_page_catpos($id, ' > ')}<!--面包屑导航--></div>
+<div class="aboutus">
+	<div class="aboutus_r">
+		<div class="r_ctbox">
+			
+	<div class="active" id="messagelist">
+	{if $data[note]}<h4>{$data[note]}</h4>{else}{/if}<!--单页标题或者名称-->
+	{php $query="select * from @#message where access=1 $where";}
+{list action=sql  sql='$query' page=1 pagesize=$data[page] urlrule=index.php?c=message&page=[page]}
+{if $data[is_reply_open]==1}
+{if $t.useinfo}
+<dl class="list-none metlist">
+<dt class="title"><span class="tt">{$t.id}<sup>#</sup></span><span class="name">{$t.truename}</span><span class="time"> {dr_date($t.addtime, 'Y年m月d日 H时i分')}</span></dt>
+<dd class="info"><span class="tt">留言内容</span><span class="text">{$t.info}</span></dd>
+<dd class="reinfo"><span class="tt">管理员回复</span><span class="text">{$t.useinfo}</span></dd>
+</dl>
+{/if}
+{else}
+<dl class="list-none metlist">
+<dt class="title"><span class="tt">{$t.id}<sup>#</sup></span><span class="name">{$t.truename}</span><span class="time"> {dr_date($t.addtime, 'Y年m月d日 H时i分')}</span></dt>
+<dd class="info"><span class="tt">留言内容</span><span class="text">{$t.info}</span></dd>
+<dd class="reinfo"><span class="tt">管理员回复</span><span class="text">{$t.useinfo}</span></dd>
+</dl>
+{/if}
+{/list}
+<div id="pages">{$pages}</div>
+{$error}
+{if $data[is_close]==2}
+<h3 class="ctitle">提交留言</h3>
+<script language="javascript">
+function metmessagesubmit(){
+	if (document.getElementById("truename").value.length == 0) {
+alert('姓名 不能为空');
+document.getElementById("truename").focus();
+return false;
+}
+ var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+ if(!reg.test(document.getElementById("email").value)){
+  alert('Email 格式不能对');
+  document.getElementById("email").focus();
+  return false;
+  }
+	
+if (document.getElementById("info").value.length == 0) {
+alert('留言内容 不能为空');
+document.getElementById("info").focus();
+return false;}
+}</script>
+<form enctype="multipart/form-data" method="POST" name="myform" onsubmit="return metmessagesubmit();" action="" >
+<table class="feedback_table">
+<tbody><tr>
+<td class="text">姓名</td>
+<td class="input"><input name="data[truename]" id="truename" type="text" size="30" class="input-text"><span class="info">*</span><span></span></td>
+</tr>
+<tr>
+<td class="text">电话</td>
+<td class="input"><input name="data[tel]" type="text" size="30" class="input-text"><span class="info"></span><span></span></td>
+</tr>
+<tr>
+<td class="text">Email</td>
+<td class="input"><input name="data[email]" id="email"  type="text" size="30" class="input-text"><span class="info">*</span><span></span></td>
+</tr>
+<tr>
+<td class="text">其他联系方式</td>
+<td class="input"><input name="data[other]" type="text" size="30" class="input-text"><span class="info"></span><span>如QQ、MSN等</span></td>
+</tr>
+<tr>
+<td class="text">留言内容</td>
+<td class="input"><textarea name="data[info]" id="info"  class="textarea-text" cols="50" rows="5"></textarea><span class="info">*</span><span></span></td>
+</tr>
+<tr><td class="text">验证码</td>
+<td class="input"> <input id="verifycode" name="code" placeholder="验证码" style="width:90px;height:35px;;float:left;margin-right:9px;" type="text" value="" class='input-block-level' />
+       {dr_code(100, 35)}</td>
+</tr>
+<tr><td class="text"></td>
+<td class="submint">
+<input type="hidden" name="fdtitle" value="">
+<input type="hidden" name="lang" value="cn">
+<input type="hidden" name="ip" value="127.0.0.1">
+<input type="hidden" name="totnum" value="5">
+<input type="hidden" name="id" value="">
+<input type="submit" name="Submit" value="提交信息" class="submit button orange"></td></tr>
+</tbody></table>
+</form>
+{/if}
+        </div>
+		</div>
+		<div class="ctboxbg"></div>
+	</div>
+</div>
+<div class="clear"></div>
+{template "footer.html"}

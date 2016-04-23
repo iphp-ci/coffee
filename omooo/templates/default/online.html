@@ -1,0 +1,63 @@
+	<link href="{SITE_URL}omooo/statics/css/online.css" rel="stylesheet" type="text/css" />
+ 
+    <script>
+    window.onscroll = function () { 
+    	var online_type={$online_config[online_type]};
+        var s={$online_config[online_top]};
+        var ts=document.body.scrollTop+20;
+        if(online_type==3 || online_type==4){
+    	$('#onlinebox').stop().animate({top:ts+"px"},500);
+        }
+    	} 
+	$(function(){
+		$(".onlinebox-showbox").click(function(){
+			$(this).css("display","none");
+			$(".onlinebox-conbox").css("display","block");
+		})
+		$(".onlinebox-top").click(function(){
+			$("#onlinebox").css("display","none");
+		})
+		})
+    </script>
+    {if $online_config[online_type]!=0}
+       {if $online_config[online_type]==2}
+    <div id="onlinebox" class="onlinebox onlinebox_{$online_config[online_skin]} onlinebox_{$online_config[online_skin]}_{$online_config[online_skin]}" style="position: fixed; top:{$online_config[online_top]}px;right:{$online_config[online_left]}px;">
+  	 {else if $online_config[online_type]==1}
+    <div id="onlinebox" class="onlinebox onlinebox_{$online_config[online_skin]} onlinebox_{$online_config[online_skin]}_{$online_config[online_skin]}" style="position: fixed; top:{$online_config[online_top]}px;left:{$online_config[online_left]}px;">
+ 	 {else if $online_config[online_type]==3}
+  	 <div id="onlinebox" class="onlinebox onlinebox_{$online_config[online_skin]} onlinebox_{$online_config[online_skin]}_{$online_config[online_skin]}" style="position:absolute;left:{$online_config[online_left]}px;">
+  	 {else if $online_config[online_type]==4}
+  	 <div id="onlinebox" class="onlinebox onlinebox_{$online_config[online_skin]} onlinebox_{$online_config[online_skin]}_{$online_config[online_skin]}" style="position:absolute;top:{$online_config[online_top]}px;right:{$online_config[online_left]}px;">
+  	  {/if}
+  	   <div class="onlinebox-showbox"   {if $online_config[online_skin]==3 ||  $online_config[online_skin]==2}style="display:none;"{else}style="display: block;"{/if}><span>在<br>线<br>交<br>流<br></span></div>
+  	 
+    <div class="onlinebox-conbox" {if $online_config[online_skin]==3 ||  $online_config[online_skin]==2}style="display:block;width:149px;"{else}style="width: 149px;display:none;"{/if}>
+    <div class="onlinebox-top" title="点击可隐藏">
+    <a href="javascript:;" onclick="return onlineclose();" class="onlinebox-close" title="关闭"></a><span>在线交流</span>	
+    	</div>
+    	<div class="onlinebox-center">
+    	<div class="onlinebox-center-box">
+    	{php $query='select * from @#online';}
+		{list action=sql sql='$query'}
+		<dl>
+		<dt>{$t.name}</dt>
+		<dd>
+		{if $t.qq}<a href="http://wpa.qq.com/msgrd?v=3&amp;uin={$t.qq}&amp;site=qq&amp;menu=yes" target="_blank"><img alt="QQ咨询销售" border="0" src="http://wpa.qq.com/pa?p=2:{$t.qq}:{$online_config[qq_type]}" title="QQ咨询销售"></a>{/if}
+
+    	{if $t.taobao}<span class="met_taobao"><a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid={$t.taobao}&amp;siteid=cntaobao&amp;status=2&amp;charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&amp;uid={$t.taobao}&amp;site=cntaobao&amp;s={$online_config[taobao_type]}&amp;charset=utf-8" alt="咨询销售"></a></span>{/if}
+    	{if $t.alibaba}<div><a target="_blank" href="http://amos.alicdn.com/msg.aw?v=2&amp;uid={$t.alibaba}&amp;site=cnalichn&amp;s=10&amp;charset=UTF-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&amp;uid={$t.alibaba}&amp;site=cnalichn&amp;s={$online_config[alibaba_type]}&amp;charset=UTF-8" alt="咨询销售"></a></div>{/if}
+    	{if $t.skype}<span><a href="callto://122121"><img src="{SITE_URL}omooo/statics/qq/skype/skype_{$online_config[skype_type]}.gif" border="0"></a></span>{/if}</dd>
+    	</dl>
+    	<div class="clear"></div>
+		{/list}
+		{$error}
+    	</div>
+    	</div>
+    	<div class="onlinebox-bottom">
+    	<div class="onlinebox-bottom-box">
+    	<div class="online-tbox"><p>{$online_config[note]}</p></div></div>
+		</div>
+		<div class="onlinebox-bottom-bg"></div>
+		</div>
+		</div>
+		{/if}

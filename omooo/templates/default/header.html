@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7 ]> <html lang="zh-CN" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="zh-CN" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="zh-CN" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="zh-CN"><!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <title>{$meta_title}</title>
+    <meta name="keywords" content="{$meta_title}" />
+    <meta name="description" content="{$meta_description}" />
+    <link rel="shortcut icon" href="{HOME_THEME_PATH}images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/OmWeb.css" />
+    {if $indexc}
+    <!--当是首页的时候调用index.css--> 
+    <link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/index.css" />
+    {else}
+	<link href="{HOME_THEME_PATH}css/public.css" rel="stylesheet" type="text/css" />
+    {/if}
+	<!--关键JS开始--> 
+	<script type="text/javascript">var memberpath = "{MEMBER_PATH}";</script>
+	<script type="text/javascript" src="{MEMBER_PATH}statics/js/{SITE_LANGUAGE}.js"></script>
+	<script type="text/javascript" src="{MEMBER_PATH}statics/js/jquery.min.js"></script>
+	<script type="text/javascript" src="{MEMBER_PATH}statics/js/jquery.artDialog.js?skin=default"></script>
+	<script type="text/javascript" src="{MEMBER_PATH}statics/js/omooo.js"></script>
+    <!--关键js结束-->
+    <script type="text/javascript" src="{HOME_THEME_PATH}js/OmWeb.js"></script>
+</head>
+<body>
+    <!--网站头部开始-->
+    <header class="head-repeat-x">
+        <div class="header-topbar">
+            <div class="menu">
+       	 		<a href="javascript:void(0);" onclick="dr_set_homepage('{SITE_URL}')">设为首页</a> | 
+                <a href="javascript:void(0);" onclick="dr_add_favorite('{SITE_URL}','{SITE_TITLE}')">加入收藏</a> | 
+                <a href="{SITE_URL}index.php?c=api&m=desktop&site={SITE_ID}&module={APP_DIR}">放在桌面</a> | 
+                <a href="{SITE_URL}index.php?c=so">全站搜索</a>
+            </div>
+        	<div class="member"><script type="text/javascript" src="{SITE_URL}member/index.php?c=api&m=userinfo"></script></div>
+        </div>
+        <div class="banner">
+            <div class="logo">
+                <a href="{SITE_URL}" title="首页" target="_self"></a>
+            </div>
+            <div class="ad">
+                <div class="searcher">
+                    <form method="get" target="_blank" action="{SITE_URL}index.php">
+                        <input name="c" type="hidden" value="so">
+                        <input name="module" type="hidden" value="{APP_DIR}">
+                        <p class="txt"><input type="text" class="s_txt" name="keyword" maxlength="50"></p>
+                        <p class="btn"><button type="submit" class="s_btn">搜索</button></p>
+                    </form>
+				</div>
+                <div class="add">OmWeb高级版，这是一套神奇的系统！</div>
+            </div>
+        </div>
+        <div class="top-block"></div>
+    </header>
+    <!--网站头部结束-->
+    <!--网站导航开始-->
+    <div class="nav-wrapper clear">
+        <div class="border-radius">
+            <div class="main">
+                <nav class="nav">
+                    <ul>
+                        <li id="dr_nav_0"><a href="{SITE_URL}" title="{SITE_URL}">首页</a></li>
+                        <li class="hr"></li>
+                        <!--调用type=0的网站导航数据-->
+                        {list action=navigator type=0 pid=0}
+                        <li id="dr_nav_{$t.id}"><a href="{$t.url}" title="{$t.title}" {if $t.target}target="_blank"{/if}>{$t.name}</a></li>
+                        {if $key<$count-1}<li class="hr"></li>{/if}<!--这句判断表示最后一条记录不加分隔样式-->
+                        {/list}
+                        {$error}<!--如果查询为空，error变量会返回错误提示，正式上线建议删除-->
+                    </ul>
+                </nav>
+            </div>
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+    </div>

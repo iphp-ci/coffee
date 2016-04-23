@@ -1,0 +1,80 @@
+{template "header.html"}
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                 <dt>产品中心</dt>
+               {list action=category module=photo pid=1 return=t}
+					<dd {if $t.id==$catid} style="background: #005bac;" {/if}><a href="{$t.url}" {if $t.id==$catid} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+             <span class="fl">{$cat.name}</span>
+            <span class="fr weizhi">您的位置 &gt;{dr_catpos($catid, '&gt;')}&gt;{dr_strcut($title,30)}</span>
+        </div>
+        <div class="pro-con">
+            <!-- 图片展示 -->
+                <div class="banner2">
+                    <div class="bd">
+                        <ul>
+						{php $image=dr_string2array($images);}
+                        {loop $image $i $t}
+							 <li>
+                                <div class="img"><img src="{dr_thumb($t.file)}" alt=""></div>
+                            </li>
+                        {/loop}
+
+                        </ul>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    jQuery(".banner2").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });
+                </script>
+            <!-- 图片展示end -->
+
+            <!-- canshu -->
+            <div class="canshu">
+                <!-- 产品特点 -->
+                    <div class="pro-style">
+                        <div class="pro-style-title">产品特点</div>
+                        <div class="pro-style-con">
+						{$chanpintedian}
+                        </div>
+                    </div>
+
+                <!-- 产品特点end -->
+                <!-- 产品参数 -->
+                     <div class="pro-canshu" >
+                        <div class="pro-style-title" style="margin-bottom:10px;">产品参数</div>
+                        <div class="pro-style-canshu">
+							{$chanpincanshu}
+                         </div>
+                    </div>
+                <!-- 产品参数 end -->
+
+                <!-- 附件下载 -->
+                <div class="fujian">
+                 <a href="{dr_down_file($xiangguanfujian)}"><img src="{HOME_THEME_PATH}images/down.png" alt=""></a>
+
+                </div>
+                <!-- 附件下载 end -->
+
+                <!-- 图片展示 -->
+                <div class="imgshow">
+					{$tupianzhanshi}
+                </div>
+                <!-- 图片展示 end -->
+            </div> 
+        </div>
+        
+      </div>
+  </div>
+</div>
+<!-- about end -->
+
+{template "footer.html"}

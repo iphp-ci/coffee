@@ -1,0 +1,148 @@
+{template "header.html"}
+<script language="javascript">
+// 选中导航菜单
+$("#dr_nav_0").attr("class", "index");
+</script>
+<style>
+/*布局*/
+.column {
+  width: 960px;
+  margin:0 auto;
+  margin-top: 9px;
+}
+.column .column-aside {
+  width: 118px;
+  float: left;
+  _display: inline;
+}
+.column .column-main {
+  float: right;
+  _display: inline;
+}
+.column .column-main {
+  background: #fff;
+  border-left: 1px #d6d6d6 solid;
+}
+/*左边菜单*/
+.left-menu {
+  padding-top: 12px;
+}
+.left-menu .item {
+  height: 36px;
+  overflow: hidden;
+  _zoom: 1;
+}
+.left-menu .item .title {
+  line-height: 36px;
+  color: #333333;
+  font-size: 14px;
+}
+.left-menu .item .title:hover {
+  color: #cc0000;
+}
+.left-menu .item .date {
+  color: #cccccc;
+  margin-left: 6px;
+}
+.left-menu .ico {
+  float: left;
+  _display: inline;
+  text-align: center;
+  width: 14px;
+  height: 24px;
+  margin-right: 6px;
+  background: none;
+  color: #ffffff;
+}
+.left-menu .n1,
+.left-menu .n2,
+.left-menu .n3 {
+  background-position: 0 0;
+}
+.left-menu .title:hover {
+  color: #c30;
+}
+.left-menu .item {
+  margin: 0 10px;
+}
+.left-menu .now {
+  font-weight: bold;
+}
+.left-menu .now .title {
+  color: #c30;
+}
+/*右侧*/
+.map-cont {
+  width: 960px;
+  font-size: 14px;
+  overflow: hidden;
+  _zoom: 1;
+  margin: 5px auto;
+}
+.map-cont dd {
+  padding: 17px 0 10px;
+  margin:0;
+  overflow: hidden;
+  _zoom: 1;
+}
+.map-cont dd h3 {
+  width: 85px;
+  padding-left: 5px;
+  float: left;
+  _display: inline;
+}
+.map-cont a {
+  line-height: 32px;
+}
+.map-list {
+  overflow: hidden;
+  _zoom: 1;
+  float: left;
+  _display: inline;
+  width: 860px;
+}
+.map-list li {
+  float: left;
+  _display: inline;
+  margin-left: 35px;
+  width: 103px;
+}
+.map-list li a {
+  color: #333333;
+}
+.map-list li a:hover {
+  color: #c30;
+}
+.map-list li a span {
+  color: #999999;
+  padding-right: 6px;
+}
+
+</style>
+<div class="clear"></div>
+<div class="Dg">您当前位置：<a href="{SITE_URL}">首页</a>  > <a href="/index.php?c=sitemap">网站地图</a></div>
+<section class="column-main">
+	<dl class="map-cont">
+    	<!--输出模块名称-->
+		{list action=cache name=module return=m}
+    	<dd>
+            <h3 class=""><a href="{$m.url}">{$m.name}</a></h3>
+            <ul class="map-list">
+            	{list action=category module=$m.dirname pid=0 return=c1}
+                <li><a href="{$c1.url}">{$c1.name}</a></li>
+                {/list}
+            </ul>
+        </dd>
+        {/list}
+    	<dd>
+            <h3 class=""><a href="">其他页面</a></h3>
+            <ul class="map-list">
+            	<!--输出模块下的栏目顶级名称-->
+        		{list action=page module=index pid=0}
+                <li><a href="{$t.url}">{$t.name}</a></li>
+                {/list}
+            </ul>
+        </dd>
+    </dl>
+</section>
+{template "footer.html"}

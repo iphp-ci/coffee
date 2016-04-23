@@ -1,0 +1,55 @@
+{template "header.html"}
+
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                <dt>产品中心</dt>
+               {list action=category module=photo pid=1 return=t}
+					<dd {if $t.id==$catid} style="background: #005bac;" {/if}><a href="{$t.url}" {if $t.id==$catid} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">搜索结果</span>
+            <span class="fr weizhi">您的位置 &gt;搜索结果</span>
+        </div>
+        <div class="pro-list">
+            <ul>
+				{if $contentid}
+				  {list action=module module=photo field=* INid=$contentid order=$get.order page=1 pagesize=3 urlrule=$urlrule}
+                <li>
+                    <div class="fl">
+                        <div class="img">
+                            <a href="{$t.url}"><img src="{dr_thumb($t.thumb)}" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="xiangqing">
+                        <div class="title"><a href="{$t.url}">{$t.title}</a></div>
+                        <div class="description">
+                          {$t.gaikuo}
+                        </div>
+                        <div class="more"><a href="{$t.url}"><img src="{HOME_THEME_PATH}images/xiangqing.png" alt=""></a></div>
+
+                    </div>
+                </li>
+			 {/list}
+				{else}
+				<div class="norecord">对不起，没有找到任何记录！</div>
+					{/if}
+            </ul>
+             
+             <div class="page">
+                {$pages}
+            </div>
+        </div>
+        
+      </div>
+  </div>
+</div>
+<!-- about end -->
+
+{template "footer.html"}

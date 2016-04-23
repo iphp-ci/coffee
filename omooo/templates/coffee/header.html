@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$meta_title}</title>
+<meta name="keywords" content="{$meta_keywords}">
+<meta name="description" content="{$meta_description}">
+<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/index.css">
+<script src="{HOME_THEME_PATH}js/jquery-1.11.3.min.js"></script>
+<script src="{HOME_THEME_PATH}js/jquery.SuperSlide.2.1.js"></script>
+</head>
+<body>
+<!--top s -->
+<div class="top">
+    <div class="w1150">
+        <div class="welcome">{dr_block(1)}</div>
+		<form method="get" target="_blank" action="{SITE_URL}index.php">
+        <div class="search">
+			<input name="c" type="hidden"  value="so" >
+			<input type="hidden" name="module" value="photo"/>
+            <input type="text" class="input" placeholder="请输入关键字" id="keyword" name="keyword">
+            <button  class="btn" type="submit" value=""></button>
+        </div>
+		</form>
+    </div>
+
+</div>
+<!-- top end -->
+
+<!-- header s -->
+<div class="header">
+    <div class="w1150"> 
+        <div class="logo">
+		{list action=navigator type=2 return=t}
+            <a href="{SITE_URL}"><img src="{dr_thumb($t.thumb)}" alt=""></a>
+		{/list}
+        </div>
+        <div class="header-r">
+            <div class="lang-tab">
+                <a href="">简体中文</a> |
+                <a href="">ENGLIST</a>
+            </div>
+            <div class="nav">
+                <ul>
+                    <li class="on"><a href="" class="li-a">首页</a></li>
+                    <!-- 产品分类 -->
+					{list action=category module=photo pid=1 return=t1}
+                    <li><a href="{$t1.url}" class="li-a">{$t1.name}</a>
+                        <div class="sub">
+                             <dl>
+								{list action=module module=photo catid=$t1.id flag=2 return=t2}
+                                 <dd><a href="{$t2.url}">{dr_strcut($t2.title,15,'')}</a></dd>
+								{/list}
+                             </dl>
+                         </div>
+                    </li>
+					{/list}
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- header end -->

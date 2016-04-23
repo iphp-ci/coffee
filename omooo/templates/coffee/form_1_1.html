@@ -1,0 +1,56 @@
+{template "header.html"}
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                 <dt>联系我们</dt>
+                {list action=page module=index pid=6 return=t}
+					<dd {if $id==$t.id} style="background: #005bac;" {/if}><a href="{$t.url}" {if $id==$t.id} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+                <dd class="selected"><a href="{SITE_URL}index.php?c=form_1_1">在线留言</a></dd>
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">在线留言</span>
+            <span class="fr weizhi">您的位置 &gt;在线留言</span>
+        </div>
+        <div class="textarea" style="text-indent:0px;">
+                   <form action="{SITE_URL}index.php?c=form_1_1" method="post" name="myform" id="myform">
+                      <table  class="table">
+                      
+                       <tr id="dr_row_title">
+                          <th>您的姓名 : </th>
+                          
+                          <td><input type="text"  class="txtlist"  name="data[title]" id="dr_title" required="required" ></td>
+                        </tr>
+                        <tr id="dr_row_tel">
+                          <th>您的电话 : </th>
+                          
+                          <td><input type="text"  class="txtlist" name="data[tel]" id="dr_tel" required="required"></td>
+                        </tr>
+
+                       <tr id="dr_row_txt">
+                         <th>您的留言</th>
+                          
+                          <td><textarea  class="tarea" name="data[txt]" id="dr_txt" required="required"></textarea></td>
+                        </tr>
+                        <tr>
+                          <th>&nbsp;</th>
+                           <td><input type="submit" class="t-btn" value="" name="submit"> </td>
+                       </tr> 
+                       
+                      </table>
+                      </form>
+          
+        
+        </div>
+     
+      </div>
+  </div>
+</div>
+<!-- about end -->
+{template "footer.html"}
+

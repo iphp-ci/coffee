@@ -1,0 +1,34 @@
+{template "header.html"}
+
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                <dt>关于我们</dt>
+				{list action=page module=index pid=1 return=t}
+					<dd {if $id==$t.id} style="background: #005bac;" {/if}><a href="{$t.url}" {if $id==$t.id} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">{$name}</span>
+            <span class="fr weizhi">您的位置 &gt;<a href="{$url}">{$name}</a></span>
+        </div>
+        <div class="textarea">
+            {$content}
+
+        </div>
+        <!-- 图片模块 -->
+        <div class="imgarea">
+          {$tupian}
+        </div>
+      </div>
+  </div>
+</div>
+<!-- about end -->
+
+
+{template "footer.html"}

@@ -1,0 +1,65 @@
+
+<!-- 底部导航 -->
+<div class="clear"></div>
+<div class="bottom">
+    <div class="w1150">
+        <div class="f-logo">
+		{list action=navigator type=3 return=t}
+            <a href="{SITE_URL}"><img src="{dr_thumb($t.thumb)}" alt=""></a>
+		{/list}
+            <p></p>
+        </div>
+        <div class="f-nav">
+            <dl>
+			
+                <dt>关于我们</dt>
+				{list action=page module=index pid=1 return=t}
+					<dd><a href="{$t.url}">{$t.name}</a></dd>
+				{/list}
+            </dl>
+            
+            <dl>
+                <dt>新闻中心</dt>
+				{list action=category module=news pid=1 return=t}
+					<dd><a href="{$t.url}">{$t.name}</a></dd>
+				{/list}
+            </dl>
+
+             <dl>
+                <dt>合作伙伴</dt>
+                <dd><a href="{SITE_URL}network/index.php?c=category&id=1">服务网络</a></dd>
+            </dl>
+             
+            <dl>
+			 <dt>联系我们</dt>
+                {list action=page module=index pid=6 return=t}
+					<dd><a href="{$t.url}">{$t.name}</a></dd>
+				{/list}
+                 <dd><a href="{SITE_URL}index.php?c=form_2_2">在线留言</a></dd>
+            </dl>
+
+        </div>
+        <div class="code">
+		{list action=navigator type=4 return=t}
+            <img src="{dr_thumb($t.thumb)}" alt="">
+		{/list}
+            <p>扫一扫,更精彩</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- footer -->
+<div class="footer">
+    <div class="w1150">
+        <p class="add">地址：{dr_block(2)}</p>
+        <p class="tel">电话：{dr_block(3)}<i></i> 传真：{dr_block(4)}</p>
+        <p class="p3">{dr_block(5)} &nbsp; {dr_block(6)} 技术支持 : <a href="http://www.omooo.com" target="blank">摩恩网络</a></p>
+
+    </div>
+    
+</div>
+</body>
+</html>

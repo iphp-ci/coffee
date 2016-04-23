@@ -1,0 +1,33 @@
+{template "header.html"}
+<!-- about s -->
+<div class="w1150">
+  <div class="about">
+      <div class="publeft">
+           <dl>
+                <dt>联系我们</dt>
+                {list action=page module=index pid=6 return=t}
+					<dd {if $id==$t.id} style="background: #005bac;" {/if}><a href="{$t.url}" {if $id==$t.id} style="color: #d6ddf0;" {/if}>{$t.name}</a></dd>
+				{/list}
+                 <dd><a href="{SITE_URL}index.php?c=form_1_1">在线留言</a></dd>
+            </dl>
+
+      </div>
+      <div class="pubright">
+        <div class="catname">
+            <span class="fl">{$name}</span>
+            <span class="fr weizhi">您的位置 &gt;{$name}</span>
+        </div>
+        <div class="textarea" style="font-size:17px; text-indent:0px;">
+            {$content}
+        
+        </div>
+        <!-- 图片模块 -->
+        <div class="imgarea">
+          {$tupian}
+        </div>
+      </div>
+  </div>
+</div>
+<!-- about end -->
+
+{template "footer.html"}
